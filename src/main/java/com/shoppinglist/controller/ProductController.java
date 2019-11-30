@@ -4,11 +4,9 @@ import com.shoppinglist.domain.ProductDto;
 import com.shoppinglist.mapper.ProductMapper;
 import com.shoppinglist.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,19 +23,23 @@ public class ProductController {
         return productMapper.mapToProductDtoList(dbService.getAllProducts());
     }
 
-    public ProductDto getProduct() {
-        return new ProductDto(1L, "productName");
+    @RequestMapping(method = RequestMethod.GET, value = "getProduct")
+    public ProductDto getProduct(@RequestParam Long productId) throws ProductNotFoundException {
+        return productMapper.mapToProductDto(dbService.getProduct(productId));
     }
 
-    public void deleteProduct(Long taskId) {
-
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
+    public void deleteProduct(@RequestParam Long productId) {
+        dbService.deleteProduct(productId);
     }
 
-    public ProductDto updateProduct(ProductDto productDto) {
-        return new ProductDto(1L, "productName");
+    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return productMapper.mapToProductDto(dbService.saveProduct(productMapper.mapToProduct(productDto)));
     }
 
-    public void createProduct(ProductDto productDto) {
-
+    @RequestMapping(method = RequestMethod.POST, value = "createProduct", consumes = APPLICATION_JSON_VALUE)
+    public void createProduct(@RequestBody ProductDto productDto) {
+        dbService.saveProduct(productMapper.mapToProduct(productDto));
     }
 }
