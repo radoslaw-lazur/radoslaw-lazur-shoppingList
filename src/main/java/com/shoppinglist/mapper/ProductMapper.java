@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 public class ProductMapper {
 
     public Product mapToProduct (final ProductDto productDto) {
-        return new Product(productDto.getId(), productDto.getProductName());
+        return new Product(productDto.getId(), productDto.getTitle());
     }
 
     public ProductDto mapToProductDto(final Product product) {
-        return new ProductDto(product.getId(), product.getProductName());
+        return new ProductDto(product.getId(), product.getTitle());
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> productList) {
         return productList.stream()
-                .map(t -> new ProductDto(t.getId(), t.getProductName()))
+                .map(t -> new ProductDto(t.getId(), t.getTitle()))
                 .collect(Collectors.toList());
     }
 }
