@@ -25,7 +25,7 @@ public class EmailScheduler {
     private DbService dbService;
     @Autowired
     private ProductMapper productMapper;
-    private static final String SUBJECT = "Tasks: New Trello Card";
+    private static final String SUBJECT = "Products to buy. Reminder :)";
 
     //@Scheduled(cron = "0 0 10 * * *")
     @Scheduled(fixedDelay = 10000)
