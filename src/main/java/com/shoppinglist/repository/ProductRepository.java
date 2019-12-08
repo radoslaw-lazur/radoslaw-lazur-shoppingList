@@ -15,4 +15,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     Product save(Product product);
     @Override
     void deleteById(Long id);
+    @Override
+    long count();
 }

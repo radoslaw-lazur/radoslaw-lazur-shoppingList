@@ -17,4 +17,9 @@ public class Product {
     private Long id;
     @Column(name = "name")
     private String title;
+
+    @Override
+    public String toString() {
+        return "Item: " + title;
+    }
 }
