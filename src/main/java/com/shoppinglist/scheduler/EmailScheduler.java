@@ -28,7 +28,7 @@ public class EmailScheduler {
     private static final String SUBJECT = "Products to buy. Reminder :)";
 
     //@Scheduled(cron = "0 0 10 * * *")
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 7200000)
     public void sendInformationEmail() {
         long size = productRepository.count();
 
