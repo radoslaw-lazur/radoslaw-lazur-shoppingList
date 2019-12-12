@@ -10,8 +10,7 @@ import com.shoppinglist.service.SimpleEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class EmailScheduler {
@@ -27,26 +26,22 @@ public class EmailScheduler {
     private ProductMapper productMapper;
     private static final String SUBJECT = "Products to buy. Reminder :)";
 
-    //@Scheduled(cron = "0 0 10 * * *")
-    @Scheduled(fixedDelay = 7200000)
+    @Scheduled(cron = "0 0 15 * * *")
     public void sendInformationEmail() {
         long size = productRepository.count();
 
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
-                "",
+                null,
                 SUBJECT,
-                "Currently in database you have got: " + size + " " + (size == 1 ? "task:": "tasks:")
-                , checkProducts())
+                "Currently in database you have "  + size  + (size == 1 ? " product" : " products")
+                        + " to buy:"  + "\n" + printProducts())
         );
     }
 
-    private String checkProducts() {
-        List<Product> products = productRepository.findAll();
-        String list = "";
-        for(int i = 0; i < products.size(); i++) {
-            list = list + products.get(i) + "\n";
-        }
-        return list;
+    private String printProducts() {
+        return productRepository.findAll().stream()
+                .map(Product::getTitle)
+                .collect(Collectors.joining("\n"));
     }
 }
