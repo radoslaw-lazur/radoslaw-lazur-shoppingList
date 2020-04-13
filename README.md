@@ -10,6 +10,7 @@ Below you can check the deployed look of the website.
 
 The app might be helpful during shopping :) It helps me.
 
+
 <p align="center">
   <img width="311" height="522" src="https://zapodaj.net/images/2421c7ce8726c.jpg">
 </p>
