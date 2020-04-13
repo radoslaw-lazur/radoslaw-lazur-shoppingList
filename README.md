@@ -15,6 +15,7 @@ The app might be helpful during shopping :) It helps me.
   <img width="311" height="522" src="https://zapodaj.net/images/2421c7ce8726c.jpg">
 </p>
 
+
 ## Tech Description
 
 This is a CRUD application.
